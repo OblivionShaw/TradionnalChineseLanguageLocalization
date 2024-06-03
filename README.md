@@ -1,1 +1,5 @@
-# TradionnalChineseLanguageLocalization
+TerminologyConversion  
+LanguageLocalization  
+
+TradionnalChinese  
+Simplified Chinese
