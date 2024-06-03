@@ -13,7 +13,7 @@
 </head>
 <body>
 
-<h2>文字轉換工具</h2>
+<h2>繁體用語轉換</h2>
 
 <textarea id="inputText" placeholder="請在這裡輸入文字..."></textarea>
 <button onclick="convertText()">轉換</button>
@@ -32,6 +32,8 @@ async function loadConversionRules() {
         let [key, value] = line.split(',');
         conversionRules[key] = value;
     });
+    // 輸出轉換規則到控制台
+    console.log(conversionRules);
 }
 
 // 轉換文字
