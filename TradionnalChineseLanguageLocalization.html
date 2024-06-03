@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        textarea {
+            width: 200px;
+            height: 100px;
+        }
+        button {
+            margin: 0 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>文字轉換工具</h2>
+
+<textarea id="inputText" placeholder="請在這裡輸入文字..."></textarea>
+<button onclick="convertText()">轉換</button>
+<textarea id="outputText" placeholder="轉換後的文字將顯示在這裡..." readonly></textarea>
+
+<script>
+// 儲存轉換規則的物件
+let conversionRules = {};
+
+// 從CSV檔案中讀取轉換規則
+async function loadConversionRules() {
+    let response = await fetch('conversion_rules.csv');
+    let data = await response.text();
+    let lines = data.split('\n');
+    lines.forEach(line => {
+        let [key, value] = line.split(',');
+        conversionRules[key] = value;
+    });
+}
+
+// 轉換文字
+function convertText() {
+    let inputText = document.getElementById("inputText").value;
+    let outputText = inputText;
+    for (let key in conversionRules) {
+        let value = conversionRules[key];
+        outputText = outputText.replace(new RegExp(key, 'g'), value);
+    }
+    document.getElementById("outputText").value = outputText;
+}
+
+// 在頁面載入時讀取轉換規則
+window.onload = loadConversionRules;
+</script>
+
+</body>
+</html>
